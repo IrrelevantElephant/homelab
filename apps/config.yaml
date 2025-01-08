@@ -6,7 +6,7 @@ spec:
   project: default
   destination:
     name: "in-cluster"
-    namespace: cert-manager
+    namespace: default
   sources:
   - repoURL: 'https://charts.jetstack.io'
     chart: jetstack/cert-manager
