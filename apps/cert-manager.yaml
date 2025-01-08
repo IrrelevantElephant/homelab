@@ -1,3 +1,10 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: cert-manager
+
+---
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -6,11 +13,11 @@ spec:
   project: default
   destination:
     name: "in-cluster"
-    namespace: default
+    namespace: cert-manager
   sources:
   - repoURL: 'https://charts.jetstack.io'
-    chart: jetstack/cert-manager
-    targetRevision: v1.15.1
+    chart: cert-manager
+    targetRevision: 1.16.2
     helm:
       valuesObject:
         installCRDs: true
