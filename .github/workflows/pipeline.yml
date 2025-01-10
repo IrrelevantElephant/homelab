@@ -35,8 +35,6 @@ jobs:
           command: login
           options:  --grpc-web --password ${{ secrets.ARGOPASSWORD }} --username admin argocd.giulia-harry.dev
       - name: "list apps"
-        uses: clowdhaus/argo-cd-action/@main
-        with:
-          version: 2.12.4
-          command: app list
-          options:  --grpc-web
+        shell: bash
+        run: |
+          argocd --grpc-web app list
