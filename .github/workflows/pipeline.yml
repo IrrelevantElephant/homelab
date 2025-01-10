@@ -7,7 +7,7 @@ on:
 jobs:
   tag:
     name: "Tag repo"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
@@ -16,10 +16,21 @@ jobs:
 
       - name: Conventional Changelog Action
         id: conventional_changelog
-        uses: TriPSs/conventional-changelog-action@v5
+        uses: TriPSs/conventional-changelog-action@v6
         with:
           preset: conventionalcommits
           github-token: ${{ secrets.github_token }}
           skip-commit: true
     outputs:
       version: ${{ steps.conventional_changelog.outputs.version }}
+
+  argocd:
+    name: "Sync ArgoCD"
+    runs-on: ubuntu-24.04
+    steps:
+      - name: "Sync"
+        uses: clowdhaus/argo-cd-action/@main
+        with:
+          version: 2.6.7
+          command: version
+          options: --client
