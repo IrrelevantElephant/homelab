@@ -61,4 +61,4 @@ jobs:
         - name: "sync"
           shell: bash
           run: |
-            echo ${{matrix.app}}
+            argocd app sync ${{matrix.app}} --grpc-web
