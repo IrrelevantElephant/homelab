@@ -28,9 +28,9 @@ jobs:
     name: "Sync ArgoCD"
     runs-on: ubuntu-24.04
     steps:
-      - name: "Sync"
+      - name: "login"
         uses: clowdhaus/argo-cd-action/@main
         with:
-          version: 2.6.7
-          command: version
-          options: --client
+          version: 2.12.4
+          command: login
+          options:  --grpc-web --password ${{ secrets.ARGOPASSWORD }} --username admin argocd.giulia-harry.dev
