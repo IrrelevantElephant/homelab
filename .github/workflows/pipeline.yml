@@ -42,7 +42,7 @@ jobs:
         run: |
           APPSTOSYNC=$(argocd app list --grpc-web -o=json | jq '.[] | select(.status.sync.status != "Synced") | [.metadata.name]')
           echo $APPSTOSYNC | jq
-          echo "::set-output name=APPSTOSYNC::$APPSTOSYNC
+          echo "::set-output name=APPSTOSYNC::$APPSTOSYNC"
   
   sync-apps:
       name: "Sync Argo apps"
