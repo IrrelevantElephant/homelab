@@ -52,3 +52,21 @@ sync the app
 ```shell
 argocd app sync apps
 ```
+
+## DNS with CloudFlare tunnels
+
+Create the tunnel
+
+```shell
+cloudflared tunnel create argocd
+```
+
+Create a secret based on the file created by `cloudflared`
+```shell
+kubectl create secret generic argocd-tunnel-creds \
+	--from-file=credentials.json=/home/harry/.cloudflared/$TUNNELID.json
+```
+
+```shell
+cloudflared tunnel route dns argocd argocd.giulia-harry.dev
+```
