@@ -37,4 +37,4 @@ jobs:
       - name: "list apps"
         shell: bash
         run: |
-          argocd --grpc-web app list
+          argocd --grpc-web app list -o=json | jq
