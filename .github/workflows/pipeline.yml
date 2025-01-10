@@ -25,8 +25,10 @@ jobs:
       version: ${{ steps.conventional_changelog.outputs.version }}
 
   argocd:
-    name: "Sync ArgoCD"
+    name: "Get Argo Apps to sync"
     runs-on: ubuntu-24.04
+    outputs:
+      APPSTOSYNC: ${{ steps.list_apps.outputs.APPSTOSYNC }}
     steps:
       - name: "login"
         uses: clowdhaus/argo-cd-action/@main
@@ -35,6 +37,27 @@ jobs:
           command: login
           options:  --grpc-web --password ${{ secrets.ARGOPASSWORD }} --username admin argocd.giulia-harry.dev
       - name: "list apps"
+        id: list_apps
         shell: bash
         run: |
-          argocd --grpc-web app list -o=json | jq
+          $APPSTOSYNC=$(argocd app list --grpc-web -o=json | jq '.[] | select(.status.sync.status != "Synced") | [.metadata.name]')
+          echo $APPSTOSYNC
+          echo "APPSTOSYNC=$APPSTOSYNC" >> $GITHUB_OUTPUT
+  
+  sync-apps:
+      name: "Sync Argo apps"
+      runs-on: ubuntu-24.04
+      needs: argocd
+      strategy:
+        matrix: ${{fromJson(needs.argocd.outputs.APPSTOSYNC)}}
+      steps:
+        - name: "login"
+          uses: clowdhaus/argo-cd-action/@main
+          with:
+            version: 2.12.4
+            command: login
+            options:  --grpc-web --password ${{ secrets.ARGOPASSWORD }} --username admin argocd.giulia-harry.dev
+        - name: "sync"
+          shell: bash
+          run: |
+            echo ${{matrix}}

@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloudflared-argocd
+  namespace: argocd
 spec:
   selector:
     matchLabels:
@@ -62,6 +63,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cloudflared-argocd
+  namespace: argocd
 data:
   config.yaml: |
     tunnel: argocd-tunnel
