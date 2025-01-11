@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared-argocd
+  namespace: argocd
+spec:
+  selector:
+    matchLabels:
+      app: cloudflared-argocd
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cloudflared-argocd
+      annotations:
+        version: "3.0"
+    spec:
+      containers:
+      - name: cloudflared
+        image: cloudflare/cloudflared:2024.9.1
+        args:
+        - tunnel
+        - --config
+        - /etc/cloudflared/config/config.yaml
+        - run
+        livenessProbe:
+          httpGet:
+            path: /ready
+            port: 2000
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        volumeMounts:
+        - name: config
+          mountPath: /etc/cloudflared/config
+          readOnly: true
+        # Each tunnel has an associated "credentials file" which authorizes machines
+        # to run the tunnel. cloudflared will read this file from its local filesystem,
+        # and it'll be stored in a k8s secret.
+        - name: creds
+          mountPath: /etc/cloudflared/creds
+          readOnly: true
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      volumes:
+      - name: creds
+        secret:
+          secretName: argocd-tunnel-creds
+      - name: config
+        configMap:
+          name: cloudflared-argocd
+          items:
+          - key: config.yaml
+            path: config.yaml
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-argocd
+  namespace: argocd
+data:
+  config.yaml: |
+    tunnel: argocd-tunnel
+    credentials-file: /etc/cloudflared/creds/credentials.json
+    metrics: 0.0.0.0:2000
+    no-autoupdate: true
+    ingress:
+    - hostname: argocd.giulia-harry.dev
+      service: https://argocd-server:443
+      originRequest:
+        noTLSVerify: true
+    - service: http_status:404
