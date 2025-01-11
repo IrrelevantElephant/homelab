@@ -25,10 +25,10 @@ jobs:
       version: ${{ steps.conventional_changelog.outputs.version }}
 
   argocd:
-    name: "Get Argo Apps to sync"
+    name: "List out of sync apps"
     runs-on: ubuntu-24.04
     outputs:
-      APPSTOSYNC: ${{ steps.list_apps.outputs.APPSTOSYNC }}
+      apps_to_sync: ${{ steps.list_apps.outputs.apps_to_sync }}
     steps:
       - name: "login"
         uses: clowdhaus/argo-cd-action/@main
@@ -40,17 +40,16 @@ jobs:
         id: list_apps
         shell: bash
         run: |
-          APPSTOSYNC=$(argocd app list --grpc-web -o=json | jq -c '[.[] | select(.status.sync.status != "Synced") | [.metadata.name]]')
+          APPSTOSYNC=$(argocd app list --grpc-web -o=json | jq -c '{include: [.[] | select(.status.sync.status != "Synced") | {app: .metadata.name }]}')
           echo $APPSTOSYNC | jq
-          echo "APPSTOSYNC=$APPSTOSYNC" >> "$GITHUB_OUTPUT"
+          echo "apps_to_sync=$APPSTOSYNC" >> "$GITHUB_OUTPUT"
   
   sync-apps:
       name: "Sync Argo apps"
       runs-on: ubuntu-24.04
       needs: argocd
       strategy:
-        matrix: 
-          app: ${{fromJson(needs.argocd.outputs.APPSTOSYNC)}}
+        matrix: ${{fromJson(needs.argocd.outputs.apps_to_sync)}}
       steps:
         - name: "login"
           uses: clowdhaus/argo-cd-action/@main
