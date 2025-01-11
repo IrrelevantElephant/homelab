@@ -40,7 +40,7 @@ jobs:
         id: list_apps
         shell: bash
         run: |
-          APPSTOSYNC=$(argocd app list --grpc-web -o=json | jq -c '.[] | select(.status.sync.status != "Synced") | [.metadata.name]')
+          APPSTOSYNC=$(argocd app list --grpc-web -o=json | jq -c '[.[] | select(.status.sync.status != "Synced") | [.metadata.name]]')
           echo $APPSTOSYNC | jq
           echo "APPSTOSYNC=$APPSTOSYNC" >> "$GITHUB_OUTPUT"
   
