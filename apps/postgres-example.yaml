@@ -1,13 +1,20 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: example-postgres
+
+---
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-tunnel
+  name: example-postgres
   namespace: argocd
 spec:
   project: default
   destination:
     name: "in-cluster"
-    namespace: argocd
+    namespace: example-postgres
   sources:
   - repoURL: 'https://github.com/IrrelevantElephant/homelab'
-    path: resources/cloudflare-tunnels
+    path: resources/example-postgres
