@@ -27,7 +27,7 @@ spec:
 
           envFrom:
             - secretRef:
-                name: pgadmin-container-env
+                name: pgadmin-secrets
 
           volumeMounts:
             - mountPath: /var/lib/pgadmin

@@ -9,6 +9,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: pgadmin
+  namespace: argocd
 spec:
   project: default
   source:
@@ -16,5 +17,5 @@ spec:
     repoURL: 'https://github.com/IrrelevantElephant/homelab'
     targetRevision: HEAD
   destination:
-    namespace: argocd
+    namespace: pgadmin
     name: "in-cluster"
