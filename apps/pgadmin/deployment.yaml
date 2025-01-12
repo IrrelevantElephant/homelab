@@ -22,12 +22,12 @@ spec:
           image: dpage/pgadmin4:8.10
 
           ports:
-            - containerPort: 3004
+            - containerPort: 8080
               protocol: TCP
 
           env:
             - name: PGADMIN_LISTEN_PORT
-              value: "3004"
+              value: "8080"
 
           envFrom:
             - secretRef:

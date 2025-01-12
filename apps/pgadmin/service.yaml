@@ -4,7 +4,9 @@ metadata:
   name: pgadmin
 spec:
   ports:
-    - port: 3004
+    - port: 80
+      targetPort: 8080
+      name: http
   selector:
     app: pgadmin
   type: ClusterIP
