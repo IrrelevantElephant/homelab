@@ -1,0 +1,20 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: pgadmin
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pgadmin
+spec:
+  project: default
+  source:
+    path: apps/pgadmin
+    repoURL: 'https://github.com/IrrelevantElephant/homelab'
+    targetRevision: HEAD
+  destination:
+    namespace: argocd
+    name: "in-cluster"

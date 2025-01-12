@@ -21,9 +21,11 @@ spec:
             - containerPort: 3004
               protocol: TCP
 
+          env:
+            - name: PGADMIN_LISTEN_PORT
+              value: "3004"
+
           envFrom:
-            - configMapRef:
-                name: pgadmin-configmap
             - secretRef:
                 name: pgadmin-container-env
 
