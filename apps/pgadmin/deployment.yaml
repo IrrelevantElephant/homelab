@@ -40,13 +40,13 @@ spec:
               mountPath: /mnt/secrets-store
               readOnly: true
           
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
+          # resources:
+          #   requests:
+          #     memory: "256Mi"
+          #     cpu: "250m"
+          #   limits:
+          #     memory: "512  Mi"
+          #     cpu: "500m"
 
       restartPolicy: Always
 
