@@ -40,7 +40,7 @@ jobs:
         id: list_apps
         shell: bash
         run: |
-          APPSTOSYNC=$(argocd app list --grpc-web -o=json | jq -c '{include: [.[] | select(.status.sync.status != "Synced") | {app: .metadata.name }]}')
+          APPSTOSYNC=$(argocd app list --grpc-web -o=json | jq -c '{include: [.[] | select(.status.sync.status != "Synced") | {app: .metadata.name }]} | select(.include != [])')
           echo $APPSTOSYNC | jq
           echo "apps_to_sync=$APPSTOSYNC" >> "$GITHUB_OUTPUT"
   
@@ -48,6 +48,7 @@ jobs:
       name: "Sync Argo apps"
       runs-on: ubuntu-24.04
       needs: argocd
+      if: ${{ needs.argocd.outputs.apps_to_sync != '' }}
       strategy:
         matrix: ${{fromJson(needs.argocd.outputs.apps_to_sync)}}
       steps:
