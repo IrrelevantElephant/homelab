@@ -48,6 +48,7 @@ jobs:
       name: "Sync Argo apps"
       runs-on: ubuntu-24.04
       needs: argocd
+      if: ${{ fromJson(needs.argocd.outputs.apps_to_sync).include != '[]' }}
       strategy:
         matrix: ${{fromJson(needs.argocd.outputs.apps_to_sync)}}
       steps:
