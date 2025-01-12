@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+        policy-type: "app"
+    spec:
+      containers:
+        - name: pgadmin
+          image: dpage/pgadmin4:8.10
+
+          ports:
+            - containerPort: 3004
+              protocol: TCP
+
+          envFrom:
+            - configMapRef:
+                name: pgadmin-configmap
+            - secretRef:
+                name: pgadmin-container-env
+
+          volumeMounts:
+            - mountPath: /var/lib/pgadmin
+              name: pgadmin-data
+            - name: pgadmin-secrets
+              mountPath: /mnt/secrets-store
+              readOnly: true
+          
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
+      restartPolicy: Always
+
+      volumes:
+        - name: pgadmin-data
+          persistentVolumeClaim:
+            claimName: pgadmin-data
+        - name: pgadmin-secrets
+          secret:
+            secretName: pgadmin-secrets
