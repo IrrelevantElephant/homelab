@@ -1,0 +1,21 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: rabbitmq
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rabbitmq
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    name: "in-cluster"
+    namespace: rabbitmq
+  sources:
+  - repoURL: registry-1.docker.io/bitnamicharts
+    chart: rabbitmq
+    targetRevision: 15.2.2
