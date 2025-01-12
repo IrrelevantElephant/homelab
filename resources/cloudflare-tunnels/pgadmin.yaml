@@ -69,6 +69,6 @@ data:
     metrics: 0.0.0.0:2000
     no-autoupdate: true
     ingress:
-    - hostname: harryadmin.giulia-harry.dev
+    - hostname: pgadmin.giulia-harry.dev
       service: http://pgadmin:8080
     - service: http_status:404
