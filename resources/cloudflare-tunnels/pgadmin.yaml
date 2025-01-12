@@ -72,5 +72,5 @@ data:
     no-autoupdate: true
     ingress:
     - hostname: pgadmin.giulia-harry.dev
-      service: https://pgadmin:80
+      service: http://pgadmin:80
     - service: http_status:404

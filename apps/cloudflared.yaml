@@ -1,29 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-tunnel
+  name: cloudflare-tunnels
   namespace: argocd
 spec:
   project: default
   destination:
     name: "in-cluster"
-    namespace: argocd
-  sources:
-  - repoURL: 'https://github.com/IrrelevantElephant/homelab'
-    path: resources/cloudflare-tunnels
-
----
-
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: pgadmin-tunnel
-  namespace: pgadmin
-spec:
-  project: default
-  destination:
-    name: "in-cluster"
-    namespace: pgadmin
   sources:
   - repoURL: 'https://github.com/IrrelevantElephant/homelab'
     path: resources/cloudflare-tunnels
