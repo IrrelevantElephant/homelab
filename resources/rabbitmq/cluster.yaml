@@ -3,3 +3,16 @@ apiVersion: rabbitmq.com/v1beta1
 metadata:
   name: rabbitmq
   namespace: rabbitmq
+
+---
+
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: otlp_logs
+  namespace: rabbitmq
+spec:
+  name: otlp_logs # name of the queue
+  rabbitmqClusterReference:
+    name: rabbitmq
+    namespace: rabbitmq
