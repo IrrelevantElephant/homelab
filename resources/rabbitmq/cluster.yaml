@@ -1,4 +1,5 @@
-apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
+apiVersion: rabbitmq.com/v1beta1
 metadata:
-	name: hello-world
+  name: hello-world
+  namespace: rabbitmq
