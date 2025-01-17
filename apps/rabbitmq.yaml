@@ -17,5 +17,5 @@ spec:
     namespace: rabbitmq
   sources:
   - repoURL: registry-1.docker.io/bitnamicharts
-    chart: rabbitmq
-    targetRevision: 15.2.2
+    chart: rabbitmq-cluster-operator
+    targetRevision: 2.12.0
