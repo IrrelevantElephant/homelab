@@ -70,3 +70,14 @@ kubectl create secret generic argocd-tunnel-creds \
 ```shell
 cloudflared tunnel route dns argocd argocd.giulia-harry.dev
 ```
+
+## Image pull secret
+
+Create an image pull secret:
+
+```shell
+kubectl create secret generic regcred \
+    --from-file=.dockerconfigjson=./.docker/config.json \
+    --type=kubernetes.io/dockerconfigjson
+```
+
