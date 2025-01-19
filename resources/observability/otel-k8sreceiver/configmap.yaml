@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: otel-collector-config
+  name: otel-k8sreceiver-config
   namespace: default
   labels:
-    app: otel-collector
+    app: otel-k8sreceiver
 data:
   config.yaml: |
     receivers:

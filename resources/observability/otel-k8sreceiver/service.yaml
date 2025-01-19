@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: otel-collector
+  name: otel-k8sreceiver
   namespace: default
   labels:
-    app: otel-collector
+    app: otel-k8sreceiver
 spec:
   selector:
-    app: otel-collector
+    app: otel-k8sreceiver
   ports:
     - protocol: TCP
       port: 4317

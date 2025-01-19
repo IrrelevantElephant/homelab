@@ -2,17 +2,17 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
    labels:
-      app: otel-collector
-   name: otel-collector
+      app: otel-k8sreceiver
+   name: otel-k8sreceiver
 
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: otel-collector
+  name: otel-k8sreceiver
   labels:
-    app: otel-collector
+    app: otel-k8sreceiver
 rules:
 - apiGroups:
   - ""
@@ -36,13 +36,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: otel-collector
+  name: otel-k8sreceiver
   labels:
-    app: otel-collector
+    app: otel-k8sreceiver
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: otel-collector
+  name: otel-k8sreceiver
 subjects:
 - kind: ServiceAccount
   name: otel-collector

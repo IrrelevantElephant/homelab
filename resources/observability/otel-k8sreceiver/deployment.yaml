@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: otel-collector
+  name: otel-k8sreceiver
   labels:
-    app: otel-collector
+    app: otel-k8sreceiver
     namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: otel-collector
+      app: otel-k8sreceiver
   template:
     metadata:
       labels:
-        app: otel-collector
+        app: otel-k8sreceiver
       namespace: default
     spec:
-      serviceAccountName: otel-collector
+      serviceAccountName: otel-k8sreceiver
       containers:
-        - name: otel-collector
+        - name: otel-k8sreceiver
           image: 'rg.fr-par.scw.cloud/otel-collector/rabbitexporter:latest'
           imagePullPolicy: Always
           ports:
             - containerPort: 4317 # OTLP gRPC endpoint
             - containerPort: 55680 # OTLP HTTP endpoint
           volumeMounts:
-            - name: otel-collector-config
+            - name: otel-k8sreceiver-config
               mountPath: /etc/otel/config.yaml
               subPath: config.yaml
           args: 
@@ -49,8 +49,8 @@ spec:
               memory: "128Mi"
               cpu: "500m"
       volumes:
-        - name: otel-collector-config
+        - name: otel-k8sreceiver-config
           configMap:
-            name: otel-collector-config
+            name: otel-k8sreceiver-config
       imagePullSecrets:
         - name: regcred
