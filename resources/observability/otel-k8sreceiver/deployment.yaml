@@ -4,7 +4,6 @@ metadata:
   name: otel-k8sreceiver
   labels:
     app: otel-k8sreceiver
-    namespace: default
 spec:
   replicas: 1
   selector:
@@ -14,7 +13,6 @@ spec:
     metadata:
       labels:
         app: otel-k8sreceiver
-      namespace: default
     spec:
       serviceAccountName: otel-k8sreceiver
       containers:
