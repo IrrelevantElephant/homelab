@@ -28,7 +28,6 @@ rules:
   resources:
   - events
   verbs:
-  - get
   - list
   - watch
 
@@ -47,4 +46,3 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: otel-collector
-  namespace: observability
