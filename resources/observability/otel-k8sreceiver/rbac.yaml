@@ -46,3 +46,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: otel-collector
+  namespace: observability
