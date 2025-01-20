@@ -45,5 +45,5 @@ roleRef:
   name: otel-k8sreceiver
 subjects:
 - kind: ServiceAccount
-  name: otel-collector
+  name: otel-k8sreceiver
   namespace: observability
