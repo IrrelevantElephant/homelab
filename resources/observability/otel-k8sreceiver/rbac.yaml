@@ -28,8 +28,9 @@ rules:
   resources:
   - events
   verbs:
-  - watch
+  - get
   - list
+  - watch
 
 ---
 
