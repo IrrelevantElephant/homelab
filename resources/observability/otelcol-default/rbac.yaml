@@ -46,7 +46,7 @@ roleRef:
   name: otel-default
 subjects:
 - kind: ServiceAccount
-  name: otel-collector
+  name: otel-default
   # Ideally the namespace would be come from the kustomization.
   # Something to look into later.
   namespace: observability
