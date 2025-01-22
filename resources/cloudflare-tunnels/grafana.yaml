@@ -70,5 +70,5 @@ data:
     no-autoupdate: true
     ingress:
     - hostname: grafana.giulia-harry.dev
-      service: http://grafana:80
+      service: http://grafana.grafana:80
     - service: http_status:404
