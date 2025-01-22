@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: otel-k8sreceiver-config
+  name: otel-rabbitreceiver-config
   labels:
-    app: otel-k8sreceiver
+    app: otel-rabbitreceiver
 data:
   config.yaml: |
     receivers:
