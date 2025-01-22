@@ -32,7 +32,11 @@ data:
         endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
         tls:
           insecure: true
+      
       debug:
+
+      prometheus:
+        endpoint: "0.0.0.0:9000"
 
     extensions:
 
