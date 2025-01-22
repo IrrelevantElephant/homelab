@@ -32,6 +32,7 @@ data:
         endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
         tls:
           insecure: true
+      debug:
 
     extensions:
 
@@ -44,6 +45,7 @@ data:
           - batch
           exporters:
           - otlphttp/logs
+          - debug
         metrics:
           receivers:
           - kubeletstats
