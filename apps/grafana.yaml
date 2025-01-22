@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    name: "in-cluster"
+    namespace: observability
+  sources:
+  - repoURL: 'https://grafana.github.io/helm-charts'
+    chart: grafana
+    targetRevision: 7.3.3
+    helm:
+      valuesObject:
+          persistence:
+            enabled: true
+            storageClassName: longhorn
+
+          datasources:
+            datasources.yaml:
+              apiVersion: 1
+              datasources:
+                - name: Loki
+                  type: loki
+                  url: http://loki-read.observability.svc.cluster.local:3100
+                  isDefault: true
+
+  syncPolicy:
+    automated:
+      prune: true
