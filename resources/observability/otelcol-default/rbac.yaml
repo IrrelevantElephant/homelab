@@ -31,6 +31,10 @@ rules:
   - get
   - watch
   - list
+- nonResourceURLs:
+  - "/metrics"
+  verbs:
+  - get
 
 ---
 

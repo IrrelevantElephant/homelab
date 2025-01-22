@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    name: "in-cluster"
+    namespace: observability
+  sources:
+  - repoURL: 'https://prometheus-community.github.io/helm-charts'
+    chart: prometheus
+    targetRevision: 25.15.0
+
+  syncPolicy:
+    automated:
+      prune: true
