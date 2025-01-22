@@ -10,7 +10,7 @@ resources:
   - otel-rabbitreceiver/deployment.yaml
   - otel-rabbitreceiver/rbac.yaml
   - otel-rabbitreceiver/service.yaml
-  - otel-default/configmap.yaml
-  - otel-default/deployment.yaml
-  - otel-default/rbac.yaml
-  - otel-default/service.yaml
+  - otelcol-default/configmap.yaml
+  - otelcol-default/deployment.yaml
+  - otelcol-default/rbac.yaml
+  - otelcol-default/service.yaml
