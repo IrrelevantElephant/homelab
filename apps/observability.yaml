@@ -19,3 +19,6 @@ spec:
   destination:
     namespace: observability
     name: "in-cluster"
+  syncPolicy:
+    automated:
+      prune: true

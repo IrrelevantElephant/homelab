@@ -1,8 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - otel-k8sreceiver/clustersecrets.yaml
+  - common/clustersecrets.yaml
   - otel-k8sreceiver/configmap.yaml
   - otel-k8sreceiver/deployment.yaml
   - otel-k8sreceiver/rbac.yaml
   - otel-k8sreceiver/service.yaml
+  - otel-rabbitreceiver/configmap.yaml
+  - otel-rabbitreceiver/deployment.yaml
+  - otel-rabbitreceiver/rbac.yaml
+  - otel-rabbitreceiver/service.yaml
+  - otel-default/configmap.yaml
+  - otel-default/deployment.yaml
+  - otel-default/rbac.yaml
+  - otel-default/service.yaml
