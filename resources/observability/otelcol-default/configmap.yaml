@@ -24,16 +24,6 @@ data:
           insecure: true
 
     extensions:
-      healthcheckv2:
-        use_v2: true
-        http:
-          endpoint: "0.0.0.0:8080"
-          status:
-            enabled: true
-            path: "/health"
-        grpc:
-          endpoint: "0.0.0.0:13132"
-          transport: "tcp"
 
     service:
       pipelines:
@@ -44,5 +34,3 @@ data:
           - batch
           exporters:
           - otlphttp/logs
-      extensions:
-      - healthcheckv2
