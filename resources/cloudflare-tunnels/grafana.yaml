@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: cloudflared
-        image: cloudflare/cloudflared:2024.9.0
+        image: cloudflare/cloudflared:2025.1.0
         args:
         - tunnel
         - --config
@@ -70,5 +70,5 @@ data:
     no-autoupdate: true
     ingress:
     - hostname: grafana.giulia-harry.dev
-      service: http://grafana.grafana:80
+      service: http://grafana.observability:80
     - service: http_status:404
