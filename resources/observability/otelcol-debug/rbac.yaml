@@ -19,7 +19,6 @@ rules:
   resources:
   - events
   - pods
-  - namespaces
   - nodes/stats
   verbs:
   - get
@@ -34,22 +33,6 @@ rules:
   - get
   - watch
   - list
-- apiGroups:
-  - apps
-  resources:
-    - replicasets
-  verbs: 
-    - get
-    - list
-    - watch
-- apiGroups:
-    - extensions
-  resources:
-    - replicasets
-  verbs:
-    - get
-    - list
-    - watch
 - nonResourceURLs:
   - "/metrics"
   - "/stats"
