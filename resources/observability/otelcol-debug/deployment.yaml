@@ -26,8 +26,9 @@ spec:
             - name: otelcol-debug-config
               mountPath: /etc/otel/config.yaml
               subPath: config.yaml
-          args: 
-            - "--config=/etc/otel/config.yaml"
+          # args: 
+          #   - "--config=/etc/otel/config.yaml"
+          entrypoint: "/bin/bash"
           resources:
             requests:
               memory: "64Mi"
