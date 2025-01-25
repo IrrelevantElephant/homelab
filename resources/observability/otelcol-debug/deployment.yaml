@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otelcol-debug
+  labels:
+    app: otelcol-debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otelcol-debug
+  template:
+    metadata:
+      labels:
+        app: otelcol-debug
+    spec:
+      serviceAccountName: otelcol-debug
+      containers:
+        - name: otelcol-debug
+          image: 'rg.fr-par.scw.cloud/otel-collector/debug:latest'
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4317 # OTLP gRPC endpoint
+            - containerPort: 55680 # OTLP HTTP endpoint
+          volumeMounts:
+            - name: otelcol-debug-config
+              mountPath: /etc/otel/config.yaml
+              subPath: config.yaml
+          args: 
+            - "--config=/etc/otel/config.yaml"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+          - name: K8S_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+      volumes:
+        - name: otelcol-debug-config
+          configMap:
+            name: otelcol-debug-config
+      imagePullSecrets:
+        - name: regcred

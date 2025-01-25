@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otelcol-debug-config
+  labels:
+    app: otelcol-debug
+data:
+  config.yaml: |
+    receivers:
+      k8sobjects:
+        auth_type: serviceAccount
+        objects:
+          - name: events
+            mode: watch
+            group: events.k8s.io
+
+      kubeletstats:
+        collection_interval: 20s
+        initial_delay: 1s
+        auth_type: "serviceAccount"
+        endpoint: "https://${env:K8S_NODE_NAME}:10250"
+        insecure_skip_verify: true
+
+    processors:
+      batch:
+
+    exporters:
+      otlphttp/logs:
+        endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
+        tls:
+          insecure: true
+      
+      debug:
+
+      prometheus:
+        endpoint: "0.0.0.0:9000"
+
+    extensions:
+
+    service:
+      pipelines:
+        logs:
+          receivers:
+          - k8sobjects
+          processors:
+          - batch
+          exporters:
+          - otlphttp/logs
+          - debug
+        metrics:
+          receivers:
+          - kubeletstats
+          processors:
+          - batch
+          exporters:
+          - prometheus
