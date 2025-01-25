@@ -17,7 +17,7 @@ spec:
       serviceAccountName: otelcol-debug
       containers:
         - name: otelcol-debug
-          image: 'rg.fr-par.scw.cloud/otel-collector/debug:0.4.3'
+          image: 'rg.fr-par.scw.cloud/otel-collector/debug:0.4.4'
           imagePullPolicy: Always
           ports:
             - containerPort: 4317 # OTLP gRPC endpoint
@@ -26,8 +26,8 @@ spec:
             - name: otelcol-debug-config
               mountPath: /etc/otel/config.yaml
               subPath: config.yaml
-          # args: 
-          #   - "--config=/etc/otel/config.yaml"
+          args: 
+            - "--config=/etc/otel/config.yaml"
           resources:
             requests:
               memory: "64Mi"
