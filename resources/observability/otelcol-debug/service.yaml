@@ -16,3 +16,7 @@ spec:
       port: 55680
       targetPort: 55680
       name: grpc
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+      name: prometheus

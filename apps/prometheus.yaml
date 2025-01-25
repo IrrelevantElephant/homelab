@@ -24,7 +24,7 @@ spec:
             - job_name: otel
               static_configs:
                 - targets:
-                  - otel-debug.observability.svc.cluster.local:9000
+                  - otelcol-debug.observability.svc.cluster.local:9000
 
   syncPolicy:
     automated:

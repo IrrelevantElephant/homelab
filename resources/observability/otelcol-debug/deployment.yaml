@@ -22,6 +22,7 @@ spec:
           ports:
             - containerPort: 4317 # OTLP gRPC endpoint
             - containerPort: 55680 # OTLP HTTP endpoint
+            - containerPort: 9000 # prometheus endpoint
           volumeMounts:
             - name: otelcol-debug-config
               mountPath: /etc/otel/config.yaml
