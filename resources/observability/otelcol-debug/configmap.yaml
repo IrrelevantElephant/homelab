@@ -23,6 +23,8 @@ data:
 
     processors:
       batch:
+      k8sattributes:
+        auth_type: 'serviceAccount'
 
     exporters:
       otlphttp/logs:
@@ -44,6 +46,7 @@ data:
           - k8sobjects
           processors:
           - batch
+          - k8sattributes
           exporters:
           - otlphttp/logs
           - debug
@@ -52,5 +55,6 @@ data:
           - kubeletstats
           processors:
           - batch
+          - k8sattributes
           exporters:
           - prometheus
