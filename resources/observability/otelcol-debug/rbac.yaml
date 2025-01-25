@@ -19,7 +19,7 @@ rules:
   resources:
   - events
   - pods
-  - nodes
+  - nodes/stats
   verbs:
   - get
   - list
