@@ -17,7 +17,7 @@ spec:
       serviceAccountName: otelcol-debug
       containers:
         - name: otelcol-debug
-          image: 'rg.fr-par.scw.cloud/otel-collector/debug:0.4.1'
+          image: 'rg.fr-par.scw.cloud/otel-collector/debug:0.4.2'
           imagePullPolicy: Always
           ports:
             - containerPort: 4317 # OTLP gRPC endpoint
