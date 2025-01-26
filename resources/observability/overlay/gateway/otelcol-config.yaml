@@ -51,7 +51,6 @@ service:
         - debug
     metrics:
       receivers:
-        - kubeletstats
         - otlp
       processors:
         - batch

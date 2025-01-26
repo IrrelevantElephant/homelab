@@ -30,4 +30,4 @@ service:
       processors:
         - batch
       exporters:
-        - prometheus
+        - otlp
