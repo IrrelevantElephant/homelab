@@ -7,12 +7,16 @@ receivers:
         mode: watch
         group: events.k8s.io
 
-  kubeletstats:
-    collection_interval: 20s
-    initial_delay: 1s
-    auth_type: "serviceAccount"
-    endpoint: "https://${env:K8S_NODE_NAME}:10250"
-    insecure_skip_verify: true
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+        cors:
+          allowed_origins:
+            - "http://*"
+            - "https://*"
 
 processors:
   batch:
@@ -29,6 +33,8 @@ exporters:
 
   prometheus:
     endpoint: "0.0.0.0:9000"
+    resource_to_telemetry_conversion:
+      enabled: true
 
 extensions:
 
@@ -46,6 +52,7 @@ service:
     metrics:
       receivers:
         - kubeletstats
+        - otlp
       processors:
         - batch
         - k8sattributes
