@@ -1,0 +1,77 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: otelcol
+  name: otelcol
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otelcol
+  labels:
+    app: otelcol
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+      - pods
+      - namespaces
+      - nodes/stats
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - "events.k8s.io"
+    resources:
+      - events
+      - nodes
+    verbs:
+      - get
+      - watch
+      - list
+  - apiGroups:
+      - apps
+    resources:
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+  - nonResourceURLs:
+      - "/metrics"
+      - "/stats"
+    verbs:
+      - get
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: otelcol
+  labels:
+    app: otelcol
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: otelcol
+subjects:
+  - kind: ServiceAccount
+    name: otelcol
+    # Ideally the namespace would be come from the kustomization.
+    # Something to look into later.
+    namespace: observability
