@@ -18,3 +18,7 @@ resources:
   - otelcol-debug/deployment.yaml
   - otelcol-debug/rbac.yaml
   - otelcol-debug/service.yaml
+  - otelcol-nodereceiver/configmap.yaml
+  - otelcol-nodereceiver/daemonset.yaml
+  - otelcol-nodereceiver/rbac.yaml
+  - otelcol-nodereceiver/service.yaml

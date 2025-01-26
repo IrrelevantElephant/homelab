@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: otelcol-nodereceiver
+  labels:
+    app: otelcol-nodereceiver
+spec:
+  selector:
+    app: otelcol-nodereceiver
+  ports:
+    - protocol: TCP
+      port: 4317
+      targetPort: 4317
+      name: http
+    - protocol: TCP
+      port: 55680
+      targetPort: 55680
+      name: grpc
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+      name: prometheus
