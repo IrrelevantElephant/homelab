@@ -18,6 +18,9 @@ data:
       batch:
       k8sattributes:
         auth_type: 'serviceAccount'
+        extract:
+          metadata:
+            - k8s.node.name
 
     exporters:
       otlphttp/logs:
