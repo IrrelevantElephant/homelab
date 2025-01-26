@@ -13,21 +13,13 @@ data:
         auth_type: "serviceAccount"
         endpoint: "https://${env:K8S_NODE_NAME}:10250"
         insecure_skip_verify: true
+        metric_groups:
+        - node
 
     processors:
       batch:
-      k8sattributes:
-        auth_type: 'serviceAccount'
-        extract:
-          metadata:
-            - k8s.node.name
 
     exporters:
-      otlphttp/logs:
-        endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
-        tls:
-          insecure: true
-      
       debug:
 
       prometheus:
@@ -42,6 +34,5 @@ data:
           - kubeletstats
           processors:
           - batch
-          - k8sattributes
           exporters:
           - prometheus
