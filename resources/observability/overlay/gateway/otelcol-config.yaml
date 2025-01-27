@@ -60,6 +60,7 @@ service:
         - debug
     metrics:
       receivers:
+        - prometheus
         - otlp
       processors:
         - batch
