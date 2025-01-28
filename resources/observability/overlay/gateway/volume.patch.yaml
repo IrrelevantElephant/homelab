@@ -1,0 +1,28 @@
+---
+- op: add
+  path: /spec/template/spec/volumes/
+  value: |-
+    - name: kube-api-access-8ddx7
+      projected:
+        defaultMode: 420
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              items:
+                - key: ca.crt
+                  path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+                - fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+                  path: namespace
+- op: add
+  path: /spec/template/spec/containers/volumeMounts
+  value: |-
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-8ddx7
+      readOnly: true

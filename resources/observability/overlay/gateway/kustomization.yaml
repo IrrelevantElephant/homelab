@@ -21,6 +21,12 @@ patches:
   - path: clusterrolebinding-patch.yaml
     target:
       kind: ClusterRoleBinding
+  - path: clusterrole.patch.yaml
+    target:
+      kind: ClusterRole
+  - path: volume.patch.yaml
+    target:
+      kind: Deployment
 
 configMapGenerator:
   - name: otelcol-gateway
