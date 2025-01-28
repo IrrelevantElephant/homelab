@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -8,5 +9,5 @@ spec:
   destination:
     name: "in-cluster"
   sources:
-  - repoURL: 'https://github.com/IrrelevantElephant/homelab'
-    path: resources/cloudflare-tunnels
+    - repoURL: "https://github.com/IrrelevantElephant/homelab"
+      path: resources/cloudflare-tunnels

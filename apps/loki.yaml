@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,11 +10,11 @@ spec:
     name: "in-cluster"
     namespace: observability
   sources:
-  - repoURL: 'https://grafana.github.io/helm-charts'
-    chart: loki
-    targetRevision: 5.43.3
-    helm:
-      valuesObject:
+    - repoURL: "https://grafana.github.io/helm-charts"
+      chart: loki
+      targetRevision: 5.43.3
+      helm:
+        valuesObject:
           loki:
             auth_enabled: false
             image:

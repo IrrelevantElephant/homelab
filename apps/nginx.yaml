@@ -1,10 +1,10 @@
+---
 kind: Namespace
 apiVersion: v1
 metadata:
   name: ingress-nginx
 
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,6 +16,6 @@ spec:
     name: "in-cluster"
     namespace: ingress-nginx
   sources:
-  - repoURL: 'https://kubernetes.github.io/ingress-nginx'
-    chart: ingress-nginx
-    targetRevision: 4.12.0
+    - repoURL: "https://kubernetes.github.io/ingress-nginx"
+      chart: ingress-nginx
+      targetRevision: 4.12.0

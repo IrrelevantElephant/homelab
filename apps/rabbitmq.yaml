@@ -1,10 +1,10 @@
+---
 kind: Namespace
 apiVersion: v1
 metadata:
   name: rabbitmq
 
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,12 +16,11 @@ spec:
     name: "in-cluster"
     namespace: rabbitmq
   sources:
-  - repoURL: registry-1.docker.io/bitnamicharts
-    chart: rabbitmq-cluster-operator
-    targetRevision: 3.19.0
+    - repoURL: registry-1.docker.io/bitnamicharts
+      chart: rabbitmq-cluster-operator
+      targetRevision: 3.19.0
 
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -31,7 +30,7 @@ spec:
   project: default
   source:
     path: resources/rabbitmq
-    repoURL: 'https://github.com/IrrelevantElephant/homelab'
+    repoURL: "https://github.com/IrrelevantElephant/homelab"
     targetRevision: HEAD
   destination:
     namespace: rabbitmq

@@ -1,10 +1,10 @@
+---
 kind: Namespace
 apiVersion: v1
 metadata:
   name: observability
 
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     path: resources/observability
-    repoURL: 'https://github.com/IrrelevantElephant/homelab'
+    repoURL: "https://github.com/IrrelevantElephant/homelab"
     targetRevision: HEAD
   destination:
     namespace: observability

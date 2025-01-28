@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,11 +10,11 @@ spec:
     name: "in-cluster"
     namespace: observability
   sources:
-  - repoURL: 'https://grafana.github.io/helm-charts'
-    chart: grafana
-    targetRevision: 7.3.3
-    helm:
-      valuesObject:
+    - repoURL: "https://grafana.github.io/helm-charts"
+      chart: grafana
+      targetRevision: 7.3.3
+      helm:
+        valuesObject:
           persistence:
             enabled: true
             storageClassName: longhorn

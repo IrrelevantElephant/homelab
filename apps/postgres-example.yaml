@@ -1,10 +1,10 @@
+---
 kind: Namespace
 apiVersion: v1
 metadata:
   name: example-postgres
 
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,5 +16,5 @@ spec:
     name: "in-cluster"
     namespace: example-postgres
   sources:
-  - repoURL: 'https://github.com/IrrelevantElephant/homelab'
-    path: resources/example-postgres
+    - repoURL: "https://github.com/IrrelevantElephant/homelab"
+      path: resources/example-postgres
