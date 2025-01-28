@@ -27,6 +27,9 @@ patches:
   - path: volume.patch.yaml
     target:
       kind: Deployment
+  - path: resources.patch.yaml
+    target:
+      kind: Deployment
 
 configMapGenerator:
   - name: otelcol-gateway
