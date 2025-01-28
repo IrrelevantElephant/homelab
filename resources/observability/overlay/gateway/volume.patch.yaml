@@ -1,6 +1,6 @@
 ---
 - op: add
-  path: /spec/template/spec/volumes/
+  path: /spec/template/spec/volumes/-
   value: |-
     - name: kube-api-access-8ddx7
       projected:
@@ -21,7 +21,7 @@
                     fieldPath: metadata.namespace
                   path: namespace
 - op: add
-  path: /spec/template/spec/containers/volumeMounts
+  path: /spec/template/spec/containers/volumeMounts/-
   value: |-
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
       name: kube-api-access-8ddx7
