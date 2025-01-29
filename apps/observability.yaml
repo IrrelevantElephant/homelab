@@ -16,6 +16,8 @@ spec:
     path: resources/observability
     repoURL: "https://github.com/IrrelevantElephant/homelab"
     targetRevision: HEAD
+    kustomize:
+      namespace: observability
   destination:
     namespace: observability
     name: "in-cluster"
