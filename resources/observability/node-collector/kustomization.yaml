@@ -6,6 +6,7 @@ helmCharts:
     repo: https://open-telemetry.github.io/opentelemetry-helm-charts
     version: 0.115.0
     releaseName: node-collector
+    namespace: observability
     valuesInline:
       mode: daemonset
       image:
