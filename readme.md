@@ -53,6 +53,18 @@ sync the app
 argocd app sync apps
 ```
 
+Modify argocd configmap to enable helm chart support in kustomize:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+data:
+  kustomize.buildOptions: --enable-helm
+```
+
 ## DNS with CloudFlare tunnels
 
 Create the tunnel
