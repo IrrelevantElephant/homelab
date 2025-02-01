@@ -47,3 +47,10 @@ helmCharts:
             traces:
               receivers: [otlp]
               exporters: [otlp/traces]
+      ports:
+        prometheus:
+          enabled: true
+          containerPort: 9000
+          servicePort: 9000
+          hostPort: 9000
+          protocol: TCP
