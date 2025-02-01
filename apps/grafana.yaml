@@ -27,12 +27,21 @@ spec:
                   type: loki
                   url: http://loki-read.observability.svc.cluster.local:3100
                   isDefault: true
-                - name: Prometheus
+                - name: Prometheus-otel
                   type: prometheus
                   url: http://prometheus-server.observability.svc.cluster.local
+                - name: Prometheus-native
+                  type: prometheus
+                  url: http://prometheus-test-server.prometheus-test.svc.cluster.local
                 - name: Tempo
                   type: tempo
                   url: http://loki-read.observability.svc.cluster.local:3100
+          dashboards:
+            default:
+              node-exporter-full:
+                gnetId: 1860
+                revision: 37
+                datasource: Prometheus-native
 
   syncPolicy:
     automated:
