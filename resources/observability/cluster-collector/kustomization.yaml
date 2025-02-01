@@ -32,6 +32,10 @@ helmCharts:
             endpoint: "0.0.0.0:9000"
             resource_to_telemetry_conversion:
               enabled: true
+          otlp/traces:
+            endpoint: tempo.observability.svc.cluster.local:4317
+            tls:
+              insecure: true
         service:
           pipelines:
             logs:
@@ -42,4 +46,4 @@ helmCharts:
               exporters: [prometheus]
             traces:
               receivers: [otlp]
-              exporters: [otlp]
+              exporters: [otlp/traces]
