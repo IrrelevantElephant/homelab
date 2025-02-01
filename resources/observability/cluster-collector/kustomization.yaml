@@ -23,14 +23,23 @@ helmCharts:
             protocols:
               grpc:
                 endpoint: 0.0.0.0:4317
+          exporters:
+            otlphttp/logs:
+              endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
+              tls:
+                insecure: true
+              prometheus:
+                endpoint: "0.0.0.0:9000"
+                resource_to_telemetry_conversion:
+                  enabled: true
         service:
           pipelines:
             logs:
-              receivers:
-                - otlp
+              receivers: [otlp]
+              exporters: [otlphttp/logs]
             metrics:
-              receivers:
-                - otlp
+              receivers: [otlp]
+              exporters: [prometheus]
             traces:
-              receivers:
-                - otlp
+              receivers: [otlp]
+              exporters: [otlp]

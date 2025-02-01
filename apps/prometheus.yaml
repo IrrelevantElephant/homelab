@@ -25,7 +25,7 @@ spec:
                 - job_name: otel
                   static_configs:
                     - targets:
-                        - otelcol-gateway.observability.svc.cluster.local:9000
+                        - cluster-collector-opentelemetry-collector.observability.svc.cluster.local:9000
 
   syncPolicy:
     automated:
