@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: opentelemetry-collector
+    repo: https://open-telemetry.github.io/opentelemetry-helm-charts
+    version: 0.115.0
+    releaseName: cluster-collector
+    namespace: observability
+    valuesInline:
+      mode: deployment
+      image:
+        repository: otel/opentelemetry-collector-k8s
+      replicaCount: 1
+      presets:
+        clusterMetrics:
+          enabled: true
+        kubernetesEvents:
+          enabled: true
