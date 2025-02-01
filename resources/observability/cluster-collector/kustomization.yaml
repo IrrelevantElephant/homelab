@@ -28,10 +28,10 @@ helmCharts:
             endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
             tls:
               insecure: true
-            prometheus:
-              endpoint: "0.0.0.0:9000"
-              resource_to_telemetry_conversion:
-                enabled: true
+          prometheus:
+            endpoint: "0.0.0.0:9000"
+            resource_to_telemetry_conversion:
+              enabled: true
         service:
           pipelines:
             logs:
