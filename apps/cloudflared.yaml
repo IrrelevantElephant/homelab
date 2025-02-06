@@ -11,3 +11,7 @@ spec:
   sources:
     - repoURL: "https://github.com/IrrelevantElephant/homelab"
       path: resources/cloudflare-tunnels
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

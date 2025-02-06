@@ -34,3 +34,7 @@ spec:
           longhornManager:
             log:
               format: json
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

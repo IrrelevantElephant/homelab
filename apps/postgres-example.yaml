@@ -18,3 +18,7 @@ spec:
   sources:
     - repoURL: "https://github.com/IrrelevantElephant/homelab"
       path: resources/example-postgres
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

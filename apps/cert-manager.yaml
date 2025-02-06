@@ -22,3 +22,7 @@ spec:
       helm:
         valuesObject:
           installCRDs: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

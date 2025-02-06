@@ -15,10 +15,14 @@ spec:
   destination:
     name: "in-cluster"
     namespace: cnpg-system
-  syncPolicy:
-    syncOptions:
-      - ServerSideApply=true
   sources:
     - repoURL: "https://cloudnative-pg.github.io/charts"
       chart: cloudnative-pg
       targetRevision: 0.23.0
+
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+    automated:
+      prune: true
+      selfHeal: true

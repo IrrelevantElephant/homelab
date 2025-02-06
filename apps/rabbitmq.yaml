@@ -19,6 +19,10 @@ spec:
     - repoURL: registry-1.docker.io/bitnamicharts
       chart: rabbitmq-cluster-operator
       targetRevision: 3.19.0
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -35,3 +39,7 @@ spec:
   destination:
     namespace: rabbitmq
     name: "in-cluster"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
