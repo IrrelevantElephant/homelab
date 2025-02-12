@@ -70,5 +70,5 @@ data:
     no-autoupdate: true
     ingress:
     - hostname: nginx-demo.giulia-harry.dev
-      service: http://nginx-demo.nginx-demo:80
+      service: http://nginx-hello.nginx-demo:80
     - service: http_status:404
