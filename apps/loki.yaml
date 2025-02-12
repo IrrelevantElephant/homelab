@@ -37,11 +37,16 @@ spec:
             limits_config:
               allow_structured_metadata: true
               volume_enabled: true
+              # Retention period of two weeks.
+              retention_period: 336h
+              max_query_lookback: 336h
 
           deploymentMode: SimpleScalable
 
           minio:
             enabled: true
+            persistence:
+              size: 20Gi
 
           backend:
             replicas: 2
