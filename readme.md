@@ -1,6 +1,8 @@
 # My Homelab configuration
 
-Currently consists of three raspberry pi 5's
+Currently consists of three Raspberry Pi 5's and one Raspberry Pi 4.
+
+See [preparing nodes](./docs/preparing-nodes.md) for details on setting up individual Pi's.
 
 ## Initial setup
 
@@ -92,4 +94,3 @@ kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=./.docker/config.json \
     --type=kubernetes.io/dockerconfigjson
 ```
-
