@@ -2,6 +2,14 @@
 
 Currently consists of three Raspberry Pi 5's and one Raspberry Pi 4.
 
+```mermaid
+flowchart TD
+    Leader[Leader - RP5] --> Follower1[Follow-1 RP5]
+    Leader --> Follower2[Follow-2 RP5]
+    Leader --> Follower3[Follow-3 RP4]
+    Leader --> Follower4[Follow-1 RP5]
+```
+
 See [preparing nodes](./docs/preparing-nodes.md) for details on setting up individual Pi's.
 
 ## Initial setup
