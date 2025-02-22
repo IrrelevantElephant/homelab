@@ -28,7 +28,7 @@ helmCharts:
             endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
             tls:
               insecure: true
-          otlp/metrics:
+          otlphttp/metrics:
             endpoint: prometheus-server.observability.svc.cluster.local:9090/api/v1/otlp/v1/metrics
             tls:
               insecure: true
