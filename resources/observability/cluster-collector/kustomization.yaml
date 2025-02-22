@@ -29,7 +29,7 @@ helmCharts:
             tls:
               insecure: true
           otlphttp/metrics:
-            endpoint: prometheus-server.observability.svc.cluster.local:9090/api/v1/otlp/v1/metrics
+            endpoint: http://prometheus-server.observability.svc.cluster.local:9090/api/v1/otlp/v1/metrics
             tls:
               insecure: true
           otlp/traces:
