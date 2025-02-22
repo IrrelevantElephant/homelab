@@ -12,9 +12,12 @@ spec:
   sources:
     - repoURL: "https://prometheus-community.github.io/helm-charts"
       chart: prometheus
-      targetRevision: 25.15.0
+      targetRevision: 27.4.0
       helm:
         valuesObject:
+          server:
+            extraFlags:
+              - web.enable-otlp-receiver
           serverFiles:
             prometheus.yml:
               scrape_configs:
@@ -31,4 +34,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-
