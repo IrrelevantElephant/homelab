@@ -43,7 +43,7 @@ helmCharts:
               exporters: [otlphttp/logs]
             metrics:
               receivers: [otlp]
-              exporters: [otlp/metrics]
+              exporters: [otlphttp/metrics]
             traces:
               receivers: [otlp]
               exporters: [otlp/traces]
