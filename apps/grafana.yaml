@@ -30,6 +30,9 @@ spec:
                 - name: Prometheus
                   type: prometheus
                   url: http://prometheus-server.observability.svc.cluster.local
+                - name: kube-prometheus-stack-prometheus
+                  type: prometheus
+                  url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
                 - name: Tempo
                   type: tempo
                   url: http://loki-read.observability.svc.cluster.local:3100
@@ -50,7 +53,7 @@ spec:
               node-exporter-full:
                 gnetId: 1860
                 revision: 37
-                datasource: Prometheus
+                datasource: kube-prometheus-stack-prometheus
 
   syncPolicy:
     automated:

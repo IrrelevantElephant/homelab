@@ -46,7 +46,7 @@ spec:
           minio:
             enabled: true
             persistence:
-              size: 20Gi
+              size: 50Gi
 
           backend:
             replicas: 2

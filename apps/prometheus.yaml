@@ -25,10 +25,8 @@ spec:
                   static_configs:
                     - targets:
                         - localhost:9090
-                - job_name: otel
-                  static_configs:
-                    - targets:
-                        - cluster-collector-opentelemetry-collector.observability.svc.cluster.local:9000
+          prometheus-node-exporter:
+            enabled: false
 
   syncPolicy:
     automated:
