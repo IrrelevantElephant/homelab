@@ -24,9 +24,10 @@ helmCharts:
               grpc:
                 endpoint: 0.0.0.0:4317
           k8sobjects:
-            - name: events
-              mode: watch
-              group: events.k8s.io
+            objects:
+              - name: events
+                mode: watch
+                group: events.k8s.io
         exporters:
           otlphttp/logs:
             endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
