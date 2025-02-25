@@ -23,6 +23,7 @@ helmCharts:
             protocols:
               grpc:
                 endpoint: 0.0.0.0:4317
+          k8s_events:
         exporters:
           otlphttp/logs:
             endpoint: http://loki-write.observability.svc.cluster.local:3100/otlp
@@ -39,7 +40,7 @@ helmCharts:
         service:
           pipelines:
             logs:
-              receivers: [otlp]
+              receivers: [otlp, k8s_events]
               exporters: [otlphttp/logs]
             metrics:
               receivers: [otlp]
