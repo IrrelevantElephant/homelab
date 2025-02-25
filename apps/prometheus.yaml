@@ -18,6 +18,7 @@ spec:
           server:
             extraFlags:
               - web.enable-otlp-receiver
+              - web.enable-lifecycle
           serverFiles:
             prometheus.yml:
               scrape_configs:
