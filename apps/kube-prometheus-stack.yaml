@@ -15,11 +15,30 @@ spec:
       targetRevision: 68.3.2
       helm:
         valuesObject:
+          alertmanagers:
+            alertmanagerSpec:
+              storage:
+                volumeClaimTemplate:
+                  spec:
+                    storageClassName: longhorn
           grafana:
             enabled: false
           prometheusOperator:
             admissionWebhooks:
               enabled: false
+          prometheus:
+            prometheusSpec:
+              storageSpec:
+                volumeClaimTemplate:
+                  spec:
+                    storageClassName: longhorn
+          thanos:
+            thanosRuler:
+              thanosRulerSpec:
+                storage:
+                volumeClaimTemplate:
+                  spec:
+                    storageClassName: longhorn
   syncPolicy:
     automated:
       prune: true

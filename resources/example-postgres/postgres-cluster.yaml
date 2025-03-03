@@ -8,3 +8,5 @@ spec:
 
   storage:
     size: 1Gi
+    # Storage class needs to be defined here. Currently it can't be set at the operator level.
+    storageClass: longhorn
