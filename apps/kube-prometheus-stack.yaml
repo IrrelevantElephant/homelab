@@ -32,6 +32,9 @@ spec:
                 volumeClaimTemplate:
                   spec:
                     storageClassName: longhorn
+                    resources:
+                      requests:
+                        storage: 50Gi
           thanos:
             thanosRuler:
               thanosRulerSpec:
