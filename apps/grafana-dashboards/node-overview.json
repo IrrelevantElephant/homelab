@@ -160,7 +160,7 @@
             "calcs": [
               "lastNotNull"
             ],
-            "fields": "/^\\{__name__=\"kube_node_status_condition\", condition=\"Ready\", container=\"kube\\-state\\-metrics\", endpoint=\"http\", instance=\"10\\.42\\.0\\.248:8080\", job=\"kube\\-state\\-metrics\", namespace=\"observability\", node=\"leader\", pod=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\\-55cd9669cd\\-pmlh9\", service=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\", status=\"true\"\\}$/",
+            "fields": "/^\\{__name__=\"kube_node_status_condition\", condition=\"Ready\", container=\"kube\\-state\\-metrics\", endpoint=\"http\", instance=\"10\\.42\\.0\\.248:8080\", job=\"kube\\-state\\-metrics\", namespace=\"observability\", node=\"follower-1\", pod=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\\-55cd9669cd\\-pmlh9\", service=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\", status=\"true\"\\}$/",
             "values": false
           },
           "showThresholdLabels": false,
@@ -242,7 +242,7 @@
             "calcs": [
               "lastNotNull"
             ],
-            "fields": "/^\\{__name__=\"kube_node_status_condition\", condition=\"Ready\", container=\"kube\\-state\\-metrics\", endpoint=\"http\", instance=\"10\\.42\\.0\\.248:8080\", job=\"kube\\-state\\-metrics\", namespace=\"observability\", node=\"leader\", pod=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\\-55cd9669cd\\-pmlh9\", service=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\", status=\"true\"\\}$/",
+            "fields": "/^\\{__name__=\"kube_node_status_condition\", condition=\"Ready\", container=\"kube\\-state\\-metrics\", endpoint=\"http\", instance=\"10\\.42\\.0\\.248:8080\", job=\"kube\\-state\\-metrics\", namespace=\"observability\", node=\"follower-2\", pod=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\\-55cd9669cd\\-pmlh9\", service=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\", status=\"true\"\\}$/",
             "values": false
           },
           "showThresholdLabels": false,
@@ -324,7 +324,7 @@
             "calcs": [
               "lastNotNull"
             ],
-            "fields": "/^\\{__name__=\"kube_node_status_condition\", condition=\"Ready\", container=\"kube\\-state\\-metrics\", endpoint=\"http\", instance=\"10\\.42\\.0\\.248:8080\", job=\"kube\\-state\\-metrics\", namespace=\"observability\", node=\"leader\", pod=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\\-55cd9669cd\\-pmlh9\", service=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\", status=\"true\"\\}$/",
+            "fields": "/^\\{__name__=\"kube_node_status_condition\", condition=\"Ready\", container=\"kube\\-state\\-metrics\", endpoint=\"http\", instance=\"10\\.42\\.0\\.248:8080\", job=\"kube\\-state\\-metrics\", namespace=\"observability\", node=\"follower-3\", pod=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\\-55cd9669cd\\-pmlh9\", service=\"kube\\-prometheus\\-stack\\-kube\\-state\\-metrics\", status=\"true\"\\}$/",
             "values": false
           },
           "showThresholdLabels": false,
