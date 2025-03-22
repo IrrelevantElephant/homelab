@@ -55,6 +55,11 @@ spec:
                 revision: 37
                 datasource: kube-prometheus-stack-prometheus
 
+          # Required to prevent multi-attach volume error
+          # https://github.com/elastisys/compliantkubernetes-apps/issues/185
+          deploymentStrategy:
+            type: Recreate
+
   syncPolicy:
     automated:
       prune: true
