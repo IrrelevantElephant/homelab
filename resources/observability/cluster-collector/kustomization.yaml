@@ -11,6 +11,7 @@ helmCharts:
       mode: deployment
       image:
         repository: otel/opentelemetry-collector-contrib
+        tag: "0.120.0"
       replicaCount: 1
       presets:
         clusterMetrics:
@@ -41,10 +42,16 @@ helmCharts:
             endpoint: tempo.observability.svc.cluster.local:4317
             tls:
               insecure: true
+        processors:
+          transform:
+            log_statements:
+              # This is required to set the timestamp on k8s event logs.
+              - set(log.time, log.observed_time) where log.attributes["k8s.resource.name"] == "events"
         service:
           pipelines:
             logs:
               receivers: [otlp, k8sobjects]
+              processors: [transform]
               exporters: [otlphttp/logs]
             metrics:
               receivers: [otlp]
