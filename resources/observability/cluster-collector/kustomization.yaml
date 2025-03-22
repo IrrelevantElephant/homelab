@@ -46,7 +46,7 @@ helmCharts:
         service:
           pipelines:
             logs:
-              receivers: [otlp, k8sobjects]
+              receivers: [k8sobjects]
               exporters: [otlphttp/logs, debug]
             metrics:
               receivers: [otlp]
