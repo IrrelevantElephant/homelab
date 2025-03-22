@@ -34,7 +34,7 @@ helmCharts:
             tls:
               insecure: true
           otlphttp/metrics:
-            endpoint: http://prometheus-server.observability.svc.cluster.local/api/v1/otlp/
+            endpoint: http://prometheus-server.observability.svc.cluster.local/api/v1/otlp
             tls:
               insecure: true
           otlp/traces:
@@ -45,7 +45,7 @@ helmCharts:
           pipelines:
             logs:
               receivers: [otlp, k8sobjects]
-              exporters: [otlphttp/logs]
+              exporters: [otlphttp/logs, debug]
             metrics:
               receivers: [otlp]
               exporters: [otlphttp/metrics]
