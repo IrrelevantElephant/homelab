@@ -7,7 +7,6 @@ flowchart TD
     Leader[Leader - RP5] --> Follower1[Follow-1 RP5]
     Leader --> Follower2[Follow-2 RP5]
     Leader --> Follower3[Follow-3 RP4]
-    Leader --> Follower4[Follow-1 RP5]
 ```
 
 See [preparing nodes](./docs/preparing-nodes.md) for details on setting up individual Pi's.
@@ -18,7 +17,7 @@ See [preparing nodes](./docs/preparing-nodes.md) for details on setting up indiv
 
 ```shell
 kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
 Expose ArgoCD locally
@@ -30,7 +29,7 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 Retrieve the initial admin password
 
 ```shell
-ARGOPASSWORD=$(kubectl get secret argocd-initial-admin-secret -o=jsonpath={".data.password"} | base64 -d)
+ARGOPASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o=jsonpath={".data.password"} | base64 -d)
 ```
 
 Login
