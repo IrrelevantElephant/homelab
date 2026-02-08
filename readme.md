@@ -47,13 +47,13 @@ argocd account update-password --current-password $ARGOPASSWORD --new-password $
 Create cluster context
 
 ```shell
-argocd cluster add k3s-cluster-context
+argocd cluster add k3s
 ```
 
 Add this repo as an "app"
 
 ```shell
-argocd app create apps --repo https://github.com/IrrelevantElephant/homelab.git --path apps --dest-server https://kubernetes.default.svc --dest-namespace default
+argocd app create apps --repo https://github.com/IrrelevantElephant/homelab.git --path apps --dest-server https://kubernetes.default.svc --dest-namespace default --revision v2
 ```
 
 sync the app

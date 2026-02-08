@@ -21,6 +21,9 @@
 
         packages = with pkgs; [
           argocd
+          cloudflared
+          k9s
+          kubernetes-helm
         ];
       };
     };
