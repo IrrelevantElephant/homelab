@@ -26,6 +26,8 @@ spec:
           prometheusOperator:
             admissionWebhooks:
               enabled: false
+            tls:
+              enabled: false
           prometheus:
             prometheusSpec:
               storageSpec:
@@ -42,6 +44,7 @@ spec:
                 volumeClaimTemplate:
                   spec:
                     storageClassName: longhorn
+
   syncPolicy:
     automated:
       prune: true
