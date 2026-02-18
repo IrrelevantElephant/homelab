@@ -53,7 +53,7 @@ argocd cluster add k3s
 Add this repo as an "app"
 
 ```shell
-argocd app create apps --repo https://github.com/IrrelevantElephant/homelab.git --path apps --dest-server https://kubernetes.default.svc --dest-namespace default --revision v2
+argocd app create apps --repo https://github.com/IrrelevantElephant/homelab.git --path apps --dest-server https://kubernetes.default.svc --dest-namespace default
 ```
 
 sync the app
