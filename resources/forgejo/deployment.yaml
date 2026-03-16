@@ -36,12 +36,9 @@ spec:
           #   - secretRef:
           #       name: pgadmin-secrets
 
-          # volumeMounts:
-          #   - mountPath: /var/lib/pgadmin
-          #     name: pgadmin-data
-          #   - name: pgadmin-secrets
-          #     mountPath: /mnt/secrets-store
-          #     readOnly: true
+          volumeMounts:
+            - mountPath: /data
+              name: forgejo-data
 
           # resources:
           #   requests:
@@ -53,10 +50,10 @@ spec:
 
       restartPolicy: Always
 
-      # volumes:
-      #   - name: pgadmin-data
-      #     persistentVolumeClaim:
-      #       claimName: pgadmin-data
+      volumes:
+        - name: forgejo-data
+          persistentVolumeClaim:
+            claimName: forgejo-data
       #   - name: pgadmin-secrets
       #     secret:
       #       secretName: pgadmin-secrets
