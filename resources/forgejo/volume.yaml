@@ -6,4 +6,9 @@ metadata:
   namespace: forgejo
 spec:
   storageClassName: "longhorn"
-  volumeName: forgejo
+  volumeName: forgejo-pvc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
