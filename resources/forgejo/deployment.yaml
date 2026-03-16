@@ -38,7 +38,7 @@ spec:
 
           volumeMounts:
             - mountPath: /data
-              name: forgejo-data
+              name: forgejo-pvc
 
           # resources:
           #   requests:
@@ -51,9 +51,9 @@ spec:
       restartPolicy: Always
 
       volumes:
-        - name: forgejo-data
+        - name: forgejo-pvc
           persistentVolumeClaim:
-            claimName: forgejo-data
+            claimName: forgejo-pvc
       #   - name: pgadmin-secrets
       #     secret:
       #       secretName: pgadmin-secrets
