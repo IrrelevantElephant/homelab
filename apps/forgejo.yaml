@@ -1,0 +1,27 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: forgejo
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: forgejo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: resources/forgejo
+    repoURL: "https://github.com/IrrelevantElephant/homelab"
+    targetRevision: HEAD
+    kustomize:
+      namespace: forgejo
+  destination:
+    namespace: forgejo
+    name: "in-cluster"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

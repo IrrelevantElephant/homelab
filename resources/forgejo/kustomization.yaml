@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forgejo
+  template:
+    metadata:
+      labels:
+        app: forgejo
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      #   fsGroup: 5050
+
+      containers:
+        - name: forgejo
+          image: codeberg.org/forgejo/forgejo:14
+
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          
+          ports:
+            - containerPort: 22
+              protocol: TCP
+
+          environment:
+            - USER_UID: 1000
+            - USER_GID: 1000
+
+          # envFrom:
+          #   - secretRef:
+          #       name: pgadmin-secrets
+
+          # volumeMounts:
+          #   - mountPath: /var/lib/pgadmin
+          #     name: pgadmin-data
+          #   - name: pgadmin-secrets
+          #     mountPath: /mnt/secrets-store
+          #     readOnly: true
+
+          # resources:
+          #   requests:
+          #     memory: "256Mi"
+          #     cpu: "250m"
+          #   limits:
+          #     memory: "512Mi"
+          #     cpu: "500m"
+
+      restartPolicy: Always
+
+      # volumes:
+      #   - name: pgadmin-data
+      #     persistentVolumeClaim:
+      #       claimName: pgadmin-data
+      #   - name: pgadmin-secrets
+      #     secret:
+      #       secretName: pgadmin-secrets
