@@ -17,7 +17,7 @@
     in
     {
       devShells.${system}.default = pkgs.mkShell {
-        name = "can-finder-shell";
+        name = "homelab-shell";
 
         packages = with pkgs; [
           argocd
