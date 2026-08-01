@@ -13,11 +13,6 @@ spec:
       labels:
         app: forgejo
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-      # fsGroup: 5050
-
       containers:
         - name: forgejo
           image: codeberg.org/forgejo/forgejo:14
