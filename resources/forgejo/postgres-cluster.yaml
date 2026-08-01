@@ -1,0 +1,16 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: forgejo-postgres
+spec:
+  instances: 3
+
+  bootstrap:
+    initdb:
+      database: forgejo
+      owner: forgejo
+
+  storage:
+    size: 1Gi
+    storageClass: longhorn
