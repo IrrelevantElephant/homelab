@@ -60,6 +60,10 @@ spec:
           deploymentStrategy:
             type: Recreate
 
+    - repoURL: "https://github.com/IrrelevantElephant/homelab"
+      path: resources/grafana
+      targetRevision: HEAD
+
   syncPolicy:
     automated:
       prune: true

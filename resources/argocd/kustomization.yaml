@@ -5,9 +5,9 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - deployment.yaml
+  - cloudflared-deployment.yaml
 
 configMapGenerator:
   - name: cloudflared-argocd
     files:
-      - config.yaml
+      - config.yaml=cloudflared-config.yaml
