@@ -45,7 +45,7 @@ spec:
             - name: FORGEJO__server__ROOT_URL
               value: https://git.giulia-harry.dev/
             - name: FORGEJO__server__SSH_DOMAIN
-              value: git.giulia-harry.dev
+              value: ssh-git.giulia-harry.dev
             - name: FORGEJO__server__SSH_PORT
               value: "22"
 
