@@ -68,4 +68,6 @@ data:
     ingress:
     - hostname: git.giulia-harry.dev
       service: http://forgejo.forgejo:3000
+    - hostname: ssh.git.giulia-harry.dev
+      service: ssh://forgejo-ssh.forgejo:22
     - service: http_status:404
