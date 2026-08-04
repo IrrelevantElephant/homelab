@@ -2,17 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloudflared-forgejo
-  namespace: forgejo
+  name: cloudflared-grafana
 spec:
   selector:
     matchLabels:
-      app: cloudflared-forgejo
+      app: cloudflared-grafana
   replicas: 2
   template:
     metadata:
       labels:
-        app: cloudflared-forgejo
+        app: cloudflared-grafana
     spec:
       containers:
         - name: cloudflared
@@ -46,28 +45,10 @@ spec:
       volumes:
         - name: creds
           secret:
-            secretName: forgejo-tunnel-creds
+            secretName: grafana-tunnel-creds
         - name: config
           configMap:
-            name: cloudflared-forgejo
+            name: cloudflared-grafana
             items:
               - key: config.yaml
                 path: config.yaml
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cloudflared-forgejo
-  namespace: forgejo
-data:
-  config.yaml: |
-    tunnel: forgejo
-    credentials-file: /etc/cloudflared/creds/credentials.json
-    metrics: 0.0.0.0:2000
-    no-autoupdate: true
-    ingress:
-    - hostname: git.giulia-harry.dev
-      service: http://forgejo.forgejo:3000
-    - hostname: ssh-git.giulia-harry.dev
-      service: ssh://forgejo-ssh.forgejo:22
-    - service: http_status:404

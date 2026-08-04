@@ -2,17 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloudflared-grafana
-  namespace: observability
+  name: cloudflared-forgejo
 spec:
   selector:
     matchLabels:
-      app: cloudflared-grafana
+      app: cloudflared-forgejo
   replicas: 2
   template:
     metadata:
       labels:
-        app: cloudflared-grafana
+        app: cloudflared-forgejo
     spec:
       containers:
         - name: cloudflared
@@ -33,9 +32,6 @@ spec:
             - name: config
               mountPath: /etc/cloudflared/config
               readOnly: true
-            # Each tunnel has an associated "credentials file" which authorizes machines
-            # to run the tunnel. cloudflared will read this file from its local filesystem,
-            # and it'll be stored in a k8s secret.
             - name: creds
               mountPath: /etc/cloudflared/creds
               readOnly: true
@@ -49,26 +45,10 @@ spec:
       volumes:
         - name: creds
           secret:
-            secretName: grafana-tunnel-creds
+            secretName: forgejo-tunnel-creds
         - name: config
           configMap:
-            name: cloudflared-grafana
+            name: cloudflared-forgejo
             items:
               - key: config.yaml
                 path: config.yaml
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cloudflared-grafana
-  namespace: observability
-data:
-  config.yaml: |
-    tunnel: grafana
-    credentials-file: /etc/cloudflared/creds/credentials.json
-    metrics: 0.0.0.0:2000
-    no-autoupdate: true
-    ingress:
-    - hostname: grafana.giulia-harry.dev
-      service: http://grafana.observability:80
-    - service: http_status:404
