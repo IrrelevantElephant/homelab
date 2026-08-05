@@ -21,6 +21,7 @@ spec:
           restartPolicy: Always
           args:
             - --host=unix:///var/run/docker.sock
+            - --group=1000
             - --tls=false
           startupProbe:
             exec:
