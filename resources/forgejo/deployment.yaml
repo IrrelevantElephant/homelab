@@ -15,23 +15,16 @@ spec:
     spec:
       containers:
         - name: forgejo
-          image: codeberg.org/forgejo/forgejo:14
+          image: codeberg.org/forgejo/forgejo
           ports:
             - containerPort: 3000
               protocol: TCP
             - containerPort: 22
               protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: forgejo-config
           env:
-            - name: USER_UID
-              value: "1000"
-            - name: USER_GID
-              value: "1000"
-            - name: FORGEJO__database__DB_TYPE
-              value: postgres
-            - name: FORGEJO__database__HOST
-              value: forgejo-postgres-rw:5432
-            - name: FORGEJO__database__NAME
-              value: forgejo
             - name: FORGEJO__database__USER
               valueFrom:
                 secretKeyRef:
@@ -42,12 +35,6 @@ spec:
                 secretKeyRef:
                   name: forgejo-postgres-app
                   key: password
-            - name: FORGEJO__server__ROOT_URL
-              value: https://git.giulia-harry.dev/
-            - name: FORGEJO__server__SSH_DOMAIN
-              value: ssh-git.giulia-harry.dev
-            - name: FORGEJO__server__SSH_PORT
-              value: "22"
 
           volumeMounts:
             - mountPath: /data

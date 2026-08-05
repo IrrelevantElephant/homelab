@@ -8,3 +8,12 @@ resources:
   - postgres-cluster.yaml
   - service.yaml
   - volume.yaml
+
+configMapGenerator:
+  - name: forgejo-config
+    envs:
+      - config.env
+
+images:
+  - name: codeberg.org/forgejo/forgejo
+    newTag: "14"
