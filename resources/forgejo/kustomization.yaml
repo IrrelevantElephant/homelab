@@ -6,6 +6,7 @@ resources:
   - cloudflared
   - deployment.yaml
   - postgres-cluster.yaml
+  - runner
   - service.yaml
   - volume.yaml
 

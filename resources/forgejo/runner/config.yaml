@@ -1,0 +1,26 @@
+log:
+  level: info
+  job_level: info
+
+runner:
+  capacity: 1
+  envs:
+    DOCKER_HOST: unix:///var/run/docker.sock
+  timeout: 3h
+  shutdown_timeout: 3h
+  labels:
+    - docker:docker://docker.io/library/node:20-bookworm
+    - ubuntu-latest:docker://docker.io/library/node:20-bookworm
+    - self-hosted:docker://docker.io/library/node:20-bookworm
+
+cache:
+  enabled: true
+
+container:
+  network: ""
+  privileged: false
+  docker_host: unix:///var/run/docker.sock
+  force_pull: false
+
+host:
+  workdir_parent: /data/workspace

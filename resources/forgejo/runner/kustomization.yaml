@@ -1,0 +1,21 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+
+configMapGenerator:
+  - name: forgejo-runner-config
+    files:
+      - config.yaml
+  - name: forgejo-runner-scripts
+    files:
+      - configure-runner.sh
+      - register-runner.sh
+
+images:
+  - name: data.forgejo.org/forgejo/runner
+    newTag: "12"
+  - name: docker
+    newTag: 28-dind
