@@ -9,6 +9,10 @@ configMapGenerator:
   - name: forgejo-runner-config
     files:
       - config.yaml
+  - name: forgejo-runner-scripts
+    files:
+      - configure-runner.sh
+      - register-runner.sh
 
 images:
   - name: data.forgejo.org/forgejo/runner
