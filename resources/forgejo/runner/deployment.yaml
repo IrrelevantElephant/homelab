@@ -92,6 +92,9 @@ spec:
           env:
             - name: DOCKER_HOST
               value: unix:///var/run/docker.sock
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           volumeMounts:
             - name: data
               mountPath: /data
