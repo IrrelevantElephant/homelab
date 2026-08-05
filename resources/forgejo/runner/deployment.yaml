@@ -16,6 +16,27 @@ spec:
         app: forgejo-runner
     spec:
       initContainers:
+        - name: docker
+          image: docker
+          restartPolicy: Always
+          args:
+            - --host=unix:///var/run/docker.sock
+            - --tls=false
+          startupProbe:
+            exec:
+              command:
+                - docker
+                - info
+            failureThreshold: 60
+            periodSeconds: 2
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: docker-data
+              mountPath: /var/lib/docker
+            - name: docker-socket
+              mountPath: /var/run
+
         - name: register-runner
           image: codeberg.org/forgejo/forgejo
           command:
@@ -78,19 +99,6 @@ spec:
             - name: registration
               mountPath: /registration
               readOnly: true
-
-        - name: docker
-          image: docker
-          args:
-            - --host=unix:///var/run/docker.sock
-            - --tls=false
-          securityContext:
-            privileged: true
-          volumeMounts:
-            - name: docker-data
-              mountPath: /var/lib/docker
-            - name: docker-socket
-              mountPath: /var/run
 
       volumes:
         - name: config
