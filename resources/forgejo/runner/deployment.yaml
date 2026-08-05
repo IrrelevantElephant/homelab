@@ -1,0 +1,152 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-runner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forgejo-runner
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: forgejo-runner
+    spec:
+      initContainers:
+        - name: register-runner
+          image: codeberg.org/forgejo/forgejo
+          command:
+            - /bin/sh
+            - -ec
+          args:
+            - |
+              install -d /tmp/forgejo/custom/conf
+              printf '%s\n' \
+                'APP_NAME = Forgejo' \
+                'RUN_MODE = prod' \
+                'WORK_PATH = /tmp/forgejo' \
+                '[database]' \
+                'DB_TYPE = postgres' \
+                'HOST = forgejo-postgres-rw:5432' \
+                'NAME = forgejo' \
+                "USER = ${DATABASE_USER}" \
+                "PASSWD = ${DATABASE_PASSWORD}" \
+                'SSL_MODE = disable' \
+                '[security]' \
+                'INSTALL_LOCK = true' \
+                > /tmp/forgejo/custom/conf/app.ini
+              forgejo \
+                --work-path /tmp/forgejo \
+                --config /tmp/forgejo/custom/conf/app.ini \
+                forgejo-cli actions register \
+                --name kubernetes \
+                --labels docker,ubuntu-latest,self-hosted \
+                --secret-file /registration/secret
+          env:
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: forgejo-postgres-app
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: forgejo-postgres-app
+                  key: password
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: registration
+              mountPath: /registration
+              readOnly: true
+
+        - name: configure-runner
+          image: data.forgejo.org/forgejo/runner
+          command:
+            - /bin/sh
+            - -ec
+          args:
+            - |
+              secret="$(tr -d '\r\n' < /registration/secret)"
+              if ! printf '%s' "${secret}" | grep -Eq '^[0-9a-fA-F]{40}$'; then
+                echo 'runner registration secret must contain exactly 40 hexadecimal characters' >&2
+                exit 1
+              fi
+              identifier="$(printf '%s' "${secret}" | cut -c1-16)"
+              encoded="$(printf '%s' "${identifier}" | od -An -tx1 | tr -d ' \n')"
+              uuid="$(printf '%s-%s-%s-%s-%s' \
+                "$(printf '%s' "${encoded}" | cut -c1-8)" \
+                "$(printf '%s' "${encoded}" | cut -c9-12)" \
+                "$(printf '%s' "${encoded}" | cut -c13-16)" \
+                "$(printf '%s' "${encoded}" | cut -c17-20)" \
+                "$(printf '%s' "${encoded}" | cut -c21-32)")"
+              cp /config/config.yaml /data/config.yaml
+              printf '%s\n' \
+                '' \
+                'server:' \
+                '  connections:' \
+                '    forgejo:' \
+                '      url: http://forgejo:3000/' \
+                "      uuid: ${uuid}" \
+                '      token_url: file:/registration/secret' \
+                >> /data/config.yaml
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: data
+              mountPath: /data
+            - name: registration
+              mountPath: /registration
+              readOnly: true
+
+      containers:
+        - name: runner
+          image: data.forgejo.org/forgejo/runner
+          command:
+            - forgejo-runner
+            - daemon
+            - --config
+            - /data/config.yaml
+          env:
+            - name: DOCKER_HOST
+              value: unix:///var/run/docker.sock
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: docker-socket
+              mountPath: /var/run
+            - name: registration
+              mountPath: /registration
+              readOnly: true
+
+        - name: docker
+          image: docker
+          args:
+            - --host=unix:///var/run/docker.sock
+            - --tls=false
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: docker-data
+              mountPath: /var/lib/docker
+            - name: docker-socket
+              mountPath: /var/run
+
+      volumes:
+        - name: config
+          configMap:
+            name: forgejo-runner-config
+        - name: data
+          emptyDir: {}
+        - name: docker-data
+          emptyDir: {}
+        - name: docker-socket
+          emptyDir: {}
+        - name: registration
+          secret:
+            secretName: forgejo-runner-registration
