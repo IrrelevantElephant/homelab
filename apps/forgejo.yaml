@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     path: resources/forgejo
-    repoURL: "https://github.com/IrrelevantElephant/homelab"
+    repoURL: "https://git.giulia-harry.dev/harry/homelab"
     targetRevision: HEAD
     kustomize:
       namespace: forgejo

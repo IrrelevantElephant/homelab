@@ -60,7 +60,7 @@ spec:
           deploymentStrategy:
             type: Recreate
 
-    - repoURL: "https://github.com/IrrelevantElephant/homelab"
+    - repoURL: "https://git.giulia-harry.dev/harry/homelab"
       path: resources/grafana
       targetRevision: HEAD
 

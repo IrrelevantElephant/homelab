@@ -14,7 +14,7 @@
 #   project: default
 #   source:
 #     path: apps/pgadmin
-#     repoURL: 'https://github.com/IrrelevantElephant/homelab'
+#     repoURL: 'https://git.giulia-harry.dev/harry/homelab'
 #     targetRevision: HEAD
 #   destination:
 #     namespace: pgadmin

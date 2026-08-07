@@ -16,7 +16,7 @@ spec:
     name: "in-cluster"
     namespace: example-postgres
   sources:
-    - repoURL: "https://github.com/IrrelevantElephant/homelab"
+    - repoURL: "https://git.giulia-harry.dev/harry/homelab"
       path: resources/example-postgres
   syncPolicy:
     automated:

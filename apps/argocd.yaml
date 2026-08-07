@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     path: resources/argocd
-    repoURL: "https://github.com/IrrelevantElephant/homelab"
+    repoURL: "https://git.giulia-harry.dev/harry/homelab"
     targetRevision: HEAD
   destination:
     namespace: argocd
