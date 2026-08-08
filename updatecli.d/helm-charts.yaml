@@ -1,0 +1,123 @@
+---
+name: Check Argo CD Helm chart versions
+
+# These pipelines are explicit because the Argo CD autodiscovery crawler's
+# generated repository conditions do not currently handle quoted repoURL values.
+sources:
+  cert-manager:
+    kind: helmchart
+    spec:
+      url: https://charts.jetstack.io
+      name: cert-manager
+  cloudnative-pg:
+    kind: helmchart
+    spec:
+      url: https://cloudnative-pg.github.io/charts
+      name: cloudnative-pg
+  cluster-secret:
+    kind: helmchart
+    spec:
+      url: https://charts.clustersecret.com/
+      name: cluster-secret
+  grafana:
+    kind: helmchart
+    spec:
+      url: https://grafana.github.io/helm-charts
+      name: grafana
+  kube-prometheus-stack:
+    kind: helmchart
+    spec:
+      url: https://prometheus-community.github.io/helm-charts
+      name: kube-prometheus-stack
+  loki:
+    kind: helmchart
+    spec:
+      url: https://grafana.github.io/helm-charts
+      name: loki
+  longhorn:
+    kind: helmchart
+    spec:
+      url: https://charts.longhorn.io
+      name: longhorn
+  ingress-nginx:
+    kind: helmchart
+    spec:
+      url: https://kubernetes.github.io/ingress-nginx
+      name: ingress-nginx
+  prometheus:
+    kind: helmchart
+    spec:
+      url: https://prometheus-community.github.io/helm-charts
+      name: prometheus
+  tempo:
+    kind: helmchart
+    spec:
+      url: https://grafana.github.io/helm-charts
+      name: tempo
+
+targets:
+  cert-manager:
+    kind: yaml
+    sourceid: cert-manager
+    spec:
+      file: apps/cert-manager.yaml
+      documentindex: 1
+      key: $.spec.sources[0].targetRevision
+  cloudnative-pg:
+    kind: yaml
+    sourceid: cloudnative-pg
+    spec:
+      file: apps/cloudnativepg.yaml
+      documentindex: 1
+      key: $.spec.sources[0].targetRevision
+  cluster-secret:
+    kind: yaml
+    sourceid: cluster-secret
+    spec:
+      file: apps/clustersecret.yaml
+      documentindex: 1
+      key: $.spec.sources[0].targetRevision
+  grafana:
+    kind: yaml
+    sourceid: grafana
+    spec:
+      file: apps/grafana.yaml
+      key: $.spec.sources[0].targetRevision
+  kube-prometheus-stack:
+    kind: yaml
+    sourceid: kube-prometheus-stack
+    spec:
+      file: apps/kube-prometheus-stack.yaml
+      key: $.spec.sources[0].targetRevision
+  loki:
+    kind: yaml
+    sourceid: loki
+    spec:
+      file: apps/loki.yaml
+      key: $.spec.sources[0].targetRevision
+  longhorn:
+    kind: yaml
+    sourceid: longhorn
+    spec:
+      file: apps/longhorn.yaml
+      documentindex: 1
+      key: $.spec.sources[0].targetRevision
+  ingress-nginx:
+    kind: yaml
+    sourceid: ingress-nginx
+    spec:
+      file: apps/nginx.yaml
+      documentindex: 1
+      key: $.spec.sources[0].targetRevision
+  prometheus:
+    kind: yaml
+    sourceid: prometheus
+    spec:
+      file: apps/prometheus.yaml
+      key: $.spec.sources[0].targetRevision
+  tempo:
+    kind: yaml
+    sourceid: tempo
+    spec:
+      file: apps/tempo.yaml
+      key: $.spec.sources[0].targetRevision
