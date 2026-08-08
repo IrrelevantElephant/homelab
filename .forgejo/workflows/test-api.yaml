@@ -8,14 +8,11 @@ on:
 jobs:
   build-and-push:
     runs-on: docker
+    container:
+      image: docker:dind:latest
     steps:
       - name: Check out repository
         uses: https://code.forgejo.org/actions/checkout@v4
-
-      - name: Install Docker CLI
-        run: |
-          apt-get update
-          apt-get install --yes --no-install-recommends docker.io
 
       - name: Log in to the container registry
         env:
