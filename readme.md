@@ -101,3 +101,11 @@ kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=./.docker/config.json \
     --type=kubernetes.io/dockerconfigjson
 ```
+
+## Forgejo Actions secrets
+
+The `test-api` image workflow requires these repository Actions secrets:
+
+- `REGISTRY_USERNAME`: the Forgejo username used to publish the image.
+- `REGISTRY_TOKEN`: a Forgejo personal access token with the minimum
+  `write:package` scope.

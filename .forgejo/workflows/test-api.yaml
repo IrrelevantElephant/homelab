@@ -1,0 +1,35 @@
+name: Build test-api image
+
+on:
+  push:
+    branches:
+      - codex-test
+
+jobs:
+  build-and-push:
+    runs-on: docker
+    steps:
+      - name: Check out repository
+        uses: https://code.forgejo.org/actions/checkout@v4
+
+      - name: Install Docker CLI
+        run: |
+          apt-get update
+          apt-get install --yes --no-install-recommends docker.io
+
+      - name: Log in to the container registry
+        env:
+          REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+        run: echo "$REGISTRY_TOKEN" | docker login git.giulia-harry.dev --username "$REGISTRY_USERNAME" --password-stdin
+
+      - name: Build and push image
+        env:
+          IMAGE: git.giulia-harry.dev/harry/homelab/test-api
+        run: |
+          docker build \
+            --tag "$IMAGE:${FORGEJO_SHA}" \
+            --tag "$IMAGE:latest" \
+            resources/test-api
+          docker push "$IMAGE:${FORGEJO_SHA}"
+          docker push "$IMAGE:latest"
