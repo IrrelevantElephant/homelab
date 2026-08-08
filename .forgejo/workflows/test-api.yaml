@@ -1,0 +1,37 @@
+name: Build and Push Test API
+
+on:
+  push:
+    branches:
+      - gemma-test
+
+jobs:
+  build-and-push:
+    runs-on: docker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Docker CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+
+      - name: Login to Forgejo Registry
+        env:
+          REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+        run: |
+          echo "$REGISTRY_TOKEN" | docker login git.giulia-harry.dev -u "$REGISTRY_USERNAME" --password-stdin
+
+      - name: Build and Push
+        env:
+          REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+          IMAGE_NAME: git.giulia-harry.dev/harry/homelab/test-api
+        run: |
+          docker build -t $IMAGE_NAME:${{ github.sha }} -t $IMAGE_NAME:latest resources/test-api
+          docker push $IMAGE_NAME:${{ github.sha }}
+          docker push $IMAGE_NAME:latest
+
+# Note: REGISTRY_TOKEN must be a Forgejo personal access token with the minimum write:package scope.

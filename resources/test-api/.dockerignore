@@ -1,0 +1,7 @@
+.git
+.github
+.forgejo
+*.md
+*.log
+bin/
+obj/
