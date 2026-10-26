@@ -12,5 +12,5 @@ spec:
       owner: forgejo
 
   storage:
-    size: 1Gi
+    size: 10Gi
     storageClass: longhorn
